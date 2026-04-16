@@ -1,0 +1,62 @@
+JENKINS CRON CHEAT SHEET
+1. Cron Format (Always remember this first)
+MIN HOUR DAY MONTH DAY_OF_WEEK
+Example:
+H/2 * * * *
+ 
+2. Symbols (Core understanding)
+Symbol	Meaning
+*	Every value
+*/n	Every n units
+H	Hash (load balancing by Jenkins)
+,	Multiple values
+-	Range
+ 
+3. Basic Schedules
+* * * * *
+→ Every minute
+*/5 * * * *
+→ Every 5 minutes
+*/10 * * * *
+→ Every 10 minutes
+0 * * * *
+→ Every hour (at minute 0)
+ 
+4. Jenkins Preferred (IMPORTANT)
+H * * * *
+→ Every hour (distributed)
+H/2 * * * *
+→ Every 2 minutes (distributed)
+H/15 * * * *
+→ Every 15 minutes
+👉 Key point:
+Use H instead of * in Jenkins to avoid load spikes
+ 
+5. Daily Schedules
+H 0 * * *
+→ Daily at midnight
+H 2 * * *
+→ Daily at 2 AM
+30 14 * * *
+→ Daily at 2:30 PM
+ 
+6. Weekly Schedules
+H * * * 0
+→ Every Sunday
+H 9 * * 1-5
+→ Weekdays at 9 AM
+H 18 * * 6
+→ Every Saturday evening
+ 
+7. Monthly Schedules
+H 0 1 * *
+→ 1st day of every month
+H 12 15 * *
+→ 15th of every month at noon
+ 
+8. Multiple Values
+0 9,18 * * *
+→ 9 AM and 6 PM daily
+H 9-17 * * 1-5
+→ Every hour from 9–5 on weekdays
+
